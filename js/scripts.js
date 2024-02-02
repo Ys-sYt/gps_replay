@@ -21,7 +21,7 @@ if (square) {
 mapboxgl.accessToken = 'pk.eyJ1IjoieXNzeXlzc3kiLCJhIjoiY2wyZ2FhbHNuMDF6NjNjcGIwdDBtcHRmcSJ9.GjmchIhcpqOWWg0b21Pc0g';
 const map = new mapboxgl.Map({
 	container: 'map', // container ID
-	style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
+	style: 'https://api.maptiler.com/maps/winter-v2/style.json?key=xeycR1Jqna3Gkrzt6ZBw', // style URL
 	center: [8.53, 47.39], // starting position [lng, lat]
 	zoom: 9, // starting zoom
 });
