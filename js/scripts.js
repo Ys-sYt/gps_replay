@@ -71,7 +71,7 @@ map.on("load", async () => {
   
   
 	// fetch the geojson for the linestring to be animated
-	const trackGeojson = await fetch(`/data/swiss-1_1.geojson.geojson`).then((d) =>
+	const trackGeojson = await fetch(`./data/swiss-1_1.geojson.geojson`).then((d) =>
 	  d.json()
 	);
 	// kick off the animations
@@ -85,7 +85,7 @@ map.on("load", async () => {
 	  const mp4 = encoder.end();
 	  const anchor = document.createElement("a");
 	  anchor.href = URL.createObjectURL(new Blob([mp4], { type: "video/mp4" }));
-	  anchor.download = `swiss-1`;
+	  anchor.download = `swiss-1_1`;
 	  anchor.click();
 	}
   
