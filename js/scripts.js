@@ -22,7 +22,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoieXNzeXlzc3kiLCJhIjoiY2wyZ2FhbHNuMDF6NjNjcGIwd
 const map = new mapboxgl.Map({
 	container: 'map', // container ID
 	style: 'https://api.maptiler.com/maps/winter-v2/style.json?key=xeycR1Jqna3Gkrzt6ZBw', // style URL
-	center: [8.53, 47.39], // starting position [lng, lat]
+	center: [9.592993, 46.59408], // starting position [lng, lat]
 	zoom: 9, // starting zoom
 });
 
@@ -71,7 +71,7 @@ map.on("load", async () => {
   
   
 	// fetch the geojson for the linestring to be animated
-	const trackGeojson = await fetch(`./zurich_ramsau-1.geojson`).then((d3) =>
+	const trackGeojson = await fetch(`./swiss-1_1.geojson`).then((d3) =>
 	  d3.json()
 	);
 	// kick off the animations
@@ -137,11 +137,11 @@ map.on("load", async () => {
 		targetLngLat,
 		duration: prod ? 7000 : 5000,
 		startAltitude: 3000000,
-		endAltitude: 100000,//12000,
+		endAltitude: 9000,//12000,
 		startBearing: 0,
-		endBearing: 90,
+		endBearing: -10,
 		startPitch: 15,
-		endPitch: 30,
+		endPitch: 0,
 		prod
 	  });
   
@@ -159,7 +159,7 @@ map.on("load", async () => {
 	  // get the bounds of the linestring, use fitBounds() to animate to a final view
 	  const bounds = turf.bbox(trackGeojson);
 	  map.fitBounds(bounds, {
-		duration: 3000,
+		duration: 1500,
 		pitch: 0,
 		bearing: 0,
 		padding: 120,
