@@ -71,7 +71,7 @@ map.on("load", async () => {
   
   
 	// fetch the geojson for the linestring to be animated
-	const trackGeojson = await fetch(`./swiss-1_1.geojson`).then((d3) =>
+	const trackGeojson = await fetch(`./zurich_ramsau-1.geojson`).then((d3) =>
 	  d3.json()
 	);
 	// kick off the animations
@@ -85,7 +85,7 @@ map.on("load", async () => {
 	  const mp4 = encoder.end();
 	  const anchor = document.createElement("a");
 	  anchor.href = URL.createObjectURL(new Blob([mp4], { type: "video/mp4" }));
-	  anchor.download = `swiss-1_1`;
+	  anchor.download = `zurich_ramsau-1`;
 	  anchor.click();
 	}
   
@@ -137,11 +137,11 @@ map.on("load", async () => {
 		targetLngLat,
 		duration: prod ? 7000 : 5000,
 		startAltitude: 3000000,
-		endAltitude: 12000,
+		endAltitude: 100000,//12000,
 		startBearing: 0,
-		endBearing: -20,
-		startPitch: 40,
-		endPitch: 50,
+		endBearing: 90,
+		startPitch: 15,
+		endPitch: 30,
 		prod
 	  });
   
@@ -152,7 +152,7 @@ map.on("load", async () => {
 		path: trackGeojson,
 		startBearing: bearing,
 		startAltitude: altitude,
-		pitch: 50,
+		pitch: 30,
 		prod
 	  });
   
@@ -160,7 +160,7 @@ map.on("load", async () => {
 	  const bounds = turf.bbox(trackGeojson);
 	  map.fitBounds(bounds, {
 		duration: 3000,
-		pitch: 30,
+		pitch: 0,
 		bearing: 0,
 		padding: 120,
 	  });
