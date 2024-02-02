@@ -71,8 +71,8 @@ map.on("load", async () => {
   
   
 	// fetch the geojson for the linestring to be animated
-	const trackGeojson = await fetch(`./swiss-1_1.geojson`).then((d) =>
-	  d.json()
+	const trackGeojson = await fetch(`./swiss-1_1.geojson`).then((d3) =>
+	  d3.json()
 	);
 	// kick off the animations
 	await playAnimations(trackGeojson);
