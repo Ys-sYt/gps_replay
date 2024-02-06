@@ -68,8 +68,7 @@ map.on("load", async () => {
   
 	map.on('render', frame); // set up frame-by-frame recording
   
-  
-  
+   
 	// fetch the geojson for the linestring to be animated
 	const trackGeojson = await fetch(`./swiss-1_1.geojson`).then((d3) =>
 	  d3.json()
@@ -137,11 +136,11 @@ map.on("load", async () => {
 		targetLngLat,
 		duration: prod ? 7000 : 5000,
 		startAltitude: 3000000,
-		endAltitude: 9000,//12000,
+		endAltitude: 10000,//12000,
 		startBearing: 0,
-		endBearing: -10,
-		startPitch: 15,
-		endPitch: 0,
+		endBearing: 0, //-10
+		startPitch: 0,
+		endPitch: 30,
 		prod
 	  });
   
@@ -152,7 +151,7 @@ map.on("load", async () => {
 		path: trackGeojson,
 		startBearing: bearing,
 		startAltitude: altitude,
-		pitch: 30,
+		pitch: 30, 
 		prod
 	  });
   
