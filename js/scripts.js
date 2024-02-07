@@ -22,8 +22,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoieXNzeXlzc3kiLCJhIjoiY2wyZ2FhbHNuMDF6NjNjcGIwd
 const map = new mapboxgl.Map({
 	container: 'map', // container ID
 	style: 'https://api.maptiler.com/maps/winter-v2/style.json?key=xeycR1Jqna3Gkrzt6ZBw', // style URL
-	center: [9.592993, 46.59408], // starting position [lng, lat]
-	zoom: 9, // starting zoom
+	center: [25.024, 60.228], // starting position [lng, lat]
+	zoom: 4, // starting zoom
 });
 
 window.map = map
@@ -70,7 +70,7 @@ map.on("load", async () => {
   
    
 	// fetch the geojson for the linestring to be animated
-	const trackGeojson = await fetch(`./swiss-1_1.geojson`).then((d3) =>
+	const trackGeojson = await fetch(`./zurich-lenz_2.geojson`).then((d3) =>
 	  d3.json()
 	);
 	// kick off the animations
@@ -134,24 +134,24 @@ map.on("load", async () => {
 	  const { bearing, altitude } = await flyInAndRotate({
 		map,
 		targetLngLat,
-		duration: prod ? 7000 : 5000,
-		startAltitude: 3000000,
-		endAltitude: 10000,//12000,
+		duration: prod ? 3000 : 5000,
+		startAltitude: 300000, //9000000
+		endAltitude: 25000,//12000,
 		startBearing: 0,
-		endBearing: 0, //-10
+		endBearing: 180, //-10
 		startPitch: 0,
-		endPitch: 30,
+		endPitch: 40,
 		prod
 	  });
   
 	  // follow the path while slowly rotating the camera, passing in the camera bearing and altitude from the previous animation
 	  await animatePath({
 		map,
-		duration: prod ? 60000 : 20000,
+		duration: prod ? 20000 : 30000,
 		path: trackGeojson,
 		startBearing: bearing,
 		startAltitude: altitude,
-		pitch: 30, 
+		pitch: 40, 
 		prod
 	  });
   
