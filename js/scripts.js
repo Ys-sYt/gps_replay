@@ -8,10 +8,19 @@ import animatePath from "./animate-path.js";
 import { createGeoJSONCircle } from './util.js'
 
 const urlSearchParams = new URLSearchParams(window.location.search);
+//ここで、URLに基づいて表示するデータを選択していた。今回はそうではないので割愛。ただ
 const { gender, stage, square: squareQueryParam, prod: prodQueryParam } = Object.fromEntries(urlSearchParams.entries());
 
-const prod = prodQueryParam === 'true'
-const square = squareQueryParam === 'true'
+//const prod = prodQueryParam === 'true'
+//const square = squareQueryParam === 'true'
+
+//これがtrueだろうかfalseだろうがダウンロードはされた。中身なし。
+const prod = false;
+//const prod = 'false'
+const square = false;
+
+//console.log(prod);
+//console.log(square);
 
 if (square) {
   document.getElementById("map").style.height = '1080px';
@@ -55,7 +64,7 @@ map.on("load", async () => {
 	mapboxgl.setNow(now);
   
 	const ptr = encoder.getRGBPointer(); // keep a pointer to encoder WebAssembly heap memory
-  
+	
 	function frame() {
 	  // increment stub time by 16.6ms (60 fps)
 	  now += 1000 / 60;
@@ -64,6 +73,13 @@ map.on("load", async () => {
 	  const pixels = encoder.memory().subarray(ptr); // get a view into encoder memory
 	  gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels); // read pixels into encoder
 	  encoder.encodeRGBPointer(); // encode the frame
+	  //debug
+	  //ok
+	  //console.log(pixels.slice(0, 10)); // 最初の10ピクセルのデータをログに出力
+	  //ok
+	  //const pixelsInEncoderMemory = encoder.memory().subarray(ptr, ptr + (width * height * 4)); // RGBAなのでピクセルあたり4バイトを考慮
+	  //console.log(pixelsInEncoderMemory.slice(0, 10)); // メモリにコピーされた最初の10ピクセルのデータをログに出力
+
 	}
   
 	map.on('render', frame); // set up frame-by-frame recording
@@ -87,10 +103,9 @@ map.on("load", async () => {
 	  anchor.download = `zurich_ramsau-1`;
 	  anchor.click();
 	}
+});
   
-  });
-  
-  const add3D = () => {
+const add3D = () => {
 	// add map 3d terrain and sky layer and fog
 	// Add some fog in the background
 	map.setFog({
@@ -117,9 +132,9 @@ map.on("load", async () => {
 	  maxzoom: 14,
 	});
 	map.setTerrain({ source: "mapbox-dem", exaggeration: 1.5 });
-  };
+};
   
-  const playAnimations = async (trackGeojson) => {
+const playAnimations = async (trackGeojson) => {
 	return new Promise(async (resolve) => {
 	  // add a geojson source and layer for the linestring to the map
 	  addPathSourceAndLayer(trackGeojson);
@@ -168,9 +183,9 @@ map.on("load", async () => {
 		resolve()
 	  }, 10000)
 	})
-  };
+};
   
-  const addPathSourceAndLayer = (trackGeojson) => {
+const addPathSourceAndLayer = (trackGeojson) => {
 	// Add a line feature and layer. This feature will get updated as we progress the animation
 	map.addSource("line", {
 	  type: "geojson",
@@ -252,8 +267,6 @@ map.on("load", async () => {
 		'fill-extrusion-height': 1200
 	  }
 	});
-  
-  
-  };
+};
   
 
