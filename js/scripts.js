@@ -14,10 +14,10 @@ const { gender, stage, square: squareQueryParam, prod: prodQueryParam } = Object
 //const prod = prodQueryParam === 'true'
 //const square = squareQueryParam === 'true'
 
-//これがtrueだろうかfalseだろうがダウンロードはされた。中身なし。
-const prod = false;
+//prod = true : 本番モード。動画がダウンロードされる。
+const prod = true;
 //const prod = 'false'
-const square = false;
+const square = true;
 
 //console.log(prod);
 //console.log(square);
@@ -30,7 +30,7 @@ if (square) {
 mapboxgl.accessToken = 'pk.eyJ1IjoieXNzeXlzc3kiLCJhIjoiY2wyZ2FhbHNuMDF6NjNjcGIwdDBtcHRmcSJ9.GjmchIhcpqOWWg0b21Pc0g';
 const map = new mapboxgl.Map({
 	container: 'map', // container ID
-	style: 'https://api.maptiler.com/maps/winter-v2/style.json?key=xeycR1Jqna3Gkrzt6ZBw', // style URL
+	style: 'https://api.maptiler.com/maps/b532901a-8fd9-4516-ab5f-32a9f6b4aba7/style.json?key=xeycR1Jqna3Gkrzt6ZBw', // style URL
 	center: [25.024, 60.228], // starting position [lng, lat]
 	zoom: 4, // starting zoom
 });
@@ -86,7 +86,7 @@ map.on("load", async () => {
   
    
 	// fetch the geojson for the linestring to be animated
-	const trackGeojson = await fetch(`./zurich-lenz_2.geojson`).then((d3) =>
+	const trackGeojson = await fetch(`./hel-hannja.geojson`).then((d3) =>
 	  d3.json()
 	);
 	// kick off the animations
@@ -100,7 +100,7 @@ map.on("load", async () => {
 	  const mp4 = encoder.end();
 	  const anchor = document.createElement("a");
 	  anchor.href = URL.createObjectURL(new Blob([mp4], { type: "video/mp4" }));
-	  anchor.download = `zurich_ramsau-1`;
+	  anchor.download = `hel-hannja`;
 	  anchor.click();
 	}
 });
@@ -149,13 +149,13 @@ const playAnimations = async (trackGeojson) => {
 	  const { bearing, altitude } = await flyInAndRotate({
 		map,
 		targetLngLat,
-		duration: prod ? 3000 : 5000,
+		duration: prod ? 3000 : 3000,
 		startAltitude: 300000, //9000000
-		endAltitude: 25000,//12000,
+		endAltitude: 100000,//12000,
 		startBearing: 0,
 		endBearing: 180, //-10
 		startPitch: 0,
-		endPitch: 40,
+		endPitch: 10,
 		prod
 	  });
   
@@ -166,7 +166,7 @@ const playAnimations = async (trackGeojson) => {
 		path: trackGeojson,
 		startBearing: bearing,
 		startAltitude: altitude,
-		pitch: 40, 
+		pitch: 10, 
 		prod
 	  });
   
