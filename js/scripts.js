@@ -15,7 +15,7 @@ const { gender, stage, square: squareQueryParam, prod: prodQueryParam } = Object
 //const square = squareQueryParam === 'true'
 
 //prod = true : 本番モード。動画がダウンロードされる。
-const prod = true;
+const prod = false;
 //const prod = 'false'
 const square = false;
 
@@ -151,7 +151,7 @@ const playAnimations = async (trackGeojson) => {
 		targetLngLat,
 		duration: prod ? 3000 : 3000,
 		startAltitude: 300000, //9000000
-		endAltitude: 100000,//12000,
+		endAltitude: 70000,//12000,
 		startBearing: 0,
 		endBearing: 180, //-10
 		startPitch: 0,
@@ -162,7 +162,7 @@ const playAnimations = async (trackGeojson) => {
 	  // follow the path while slowly rotating the camera, passing in the camera bearing and altitude from the previous animation
 	  await animatePath({
 		map,
-		duration: prod ? 20000 : 30000,
+		duration: prod ? 20000 : 20000,
 		path: trackGeojson,
 		startBearing: bearing,
 		startAltitude: altitude,
