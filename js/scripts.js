@@ -17,7 +17,7 @@ const { gender, stage, square: squareQueryParam, prod: prodQueryParam } = Object
 //prod = true : 本番モード。動画がダウンロードされる。
 const prod = true;
 //const prod = 'false'
-const square = true;
+const square = false;
 
 //console.log(prod);
 //console.log(square);
@@ -86,7 +86,7 @@ map.on("load", async () => {
   
    
 	// fetch the geojson for the linestring to be animated
-	const trackGeojson = await fetch(`./hel-hannja.geojson`).then((d3) =>
+	const trackGeojson = await fetch(`./hel-haanja.geojson`).then((d3) =>
 	  d3.json()
 	);
 	// kick off the animations
@@ -100,7 +100,7 @@ map.on("load", async () => {
 	  const mp4 = encoder.end();
 	  const anchor = document.createElement("a");
 	  anchor.href = URL.createObjectURL(new Blob([mp4], { type: "video/mp4" }));
-	  anchor.download = `hel-hannja`;
+	  anchor.download = `hel-haanja`;
 	  anchor.click();
 	}
 });
@@ -269,4 +269,6 @@ const addPathSourceAndLayer = (trackGeojson) => {
 	});
 };
   
+//memo
+//square = TRUEにすると動画が出力できない。なんで？
 
