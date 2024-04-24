@@ -8,16 +8,16 @@ import animatePath from "./animate-path.js";
 import { createGeoJSONCircle } from './util.js'
 
 const urlSearchParams = new URLSearchParams(window.location.search);
-//ここで、URLに基づいて表示するデータを選択していた。今回はそうではないので割愛。ただ
+//ここで、URLに基づいて表示するデータを選択していた。今回はそうではないので割愛。
 const { gender, stage, square: squareQueryParam, prod: prodQueryParam } = Object.fromEntries(urlSearchParams.entries());
 
 //const prod = prodQueryParam === 'true'
 //const square = squareQueryParam === 'true'
 
 //prod = true : 本番モード。動画がダウンロードされる。
-const prod = false;
-//const prod = 'false'
-const square = false;
+const prod = true;
+//const prod = false;
+const square = true;
 
 //console.log(prod);
 //console.log(square);
